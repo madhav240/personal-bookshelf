@@ -30,6 +30,7 @@ export default function Search() {
         );
         const data = await res.json();
         setBooks(data.docs);
+        console.log(data.docs);
 
         booksListElmRef.current.style.display = "grid";
         loadingElmRef.current.style.display = "none";
@@ -56,12 +57,16 @@ export default function Search() {
           ref={booksListElmRef}
           className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 "
         >
-          {books.map((book, index) => (
-            <BookCard
-              props={{ book, showAddBtn: !addedBooksKeys.includes(book.key) }}
-              key={index}
-            />
-          ))}
+          {books.length > 0 ? (
+            books.map((book, index) => (
+              <BookCard
+                props={{ book, showAddBtn: !addedBooksKeys.includes(book.key) }}
+                key={index}
+              />
+            ))
+          ) : (
+            <p className="text-red-500">No search results!</p>
+          )}
         </div>
         <span ref={loadingElmRef} style={{ display: "none" }}>
           Loading...
