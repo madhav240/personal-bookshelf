@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 const RootLayout = () => {
   return (
     <>
-      <nav className="w-full fixed bg-white left-0 right-0 mx-auto space-x-6 top-0 border px-6 py-2 flex flex-row justify-center">
+      <nav className="w-full fixed bg-white left-0 right-0 mx-auto space-x-6 top-0 border px-6 py-3 flex flex-row justify-center">
         <Link to={"/"} className="text-blue-600 underline hover:text-black">
           Home
         </Link>

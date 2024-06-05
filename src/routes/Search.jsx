@@ -18,7 +18,6 @@ export default function Search() {
 
   var addedBooksKeys = JSON.parse(localStorage.getItem("books")) || [];
   addedBooksKeys = addedBooksKeys.map((book) => book.key);
-  console.log(addedBooksKeys);
 
   useDebounce(
     async () => {
@@ -55,7 +54,7 @@ export default function Search() {
 
         <div ref={booksListElmRef} className="hidden">
           {books.length > 0 ? (
-            <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 ">
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
               {books.map((book, index) => (
                 <BookCard
                   props={{

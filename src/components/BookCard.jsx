@@ -14,7 +14,7 @@ export default function BookCard({ props }) {
   }
   return (
     <>
-      <div className="border p-5 max-w-96 rounded-md">
+      <div className="border p-5 w-full rounded-md">
         <div>
           <p>
             <b>Book Title: </b>
