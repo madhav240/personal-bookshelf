@@ -16,8 +16,9 @@ export default function Search() {
   const booksListElmRef = useRef();
   const loadingElmRef = useRef();
 
-  const addedBooksKeys =
-    JSON.parse(localStorage.getItem("books")).map((book) => book.key) || [];
+  var addedBooksKeys = JSON.parse(localStorage.getItem("books")) || [];
+  addedBooksKeys = addedBooksKeys.map((book) => book.key);
+  console.log(addedBooksKeys);
 
   useDebounce(
     async () => {
