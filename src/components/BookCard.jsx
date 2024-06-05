@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export default function BookCard({ props }) {
-  console.log(props);
   const [showAddBtn, setShowAddBtn] = useState(props.showAddBtn);
   function addToBookshelf() {
     const booksList = JSON.parse(localStorage.getItem("books")) || [];

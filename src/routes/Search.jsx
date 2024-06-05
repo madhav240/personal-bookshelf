@@ -25,7 +25,6 @@ export default function Search() {
 
         const data = await res.json();
         setBooks(data.docs);
-        console.log(data);
       }
     },
     [q],
@@ -39,7 +38,7 @@ export default function Search() {
           type="text"
           placeholder="Search..."
           onChange={(e) => setQ(e.target.value)}
-          value={q.trim() ? q : ""}
+          value={q}
           spellCheck={false}
           autoFocus
           className="p-2 outline-none border mt-2"
