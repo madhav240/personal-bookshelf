@@ -30,9 +30,8 @@ export default function Search() {
         );
         const data = await res.json();
         setBooks(data.docs);
-        console.log(data.docs);
 
-        booksListElmRef.current.style.display = "grid";
+        booksListElmRef.current.style.display = "block";
         loadingElmRef.current.style.display = "none";
       }
     },
@@ -53,7 +52,7 @@ export default function Search() {
           className="p-2 outline-none border mt-2"
         />
 
-        <div ref={booksListElmRef}>
+        <div ref={booksListElmRef} className="hidden">
           {books.length > 0 ? (
             <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 ">
               {books.map((book, index) => (
