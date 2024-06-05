@@ -53,22 +53,22 @@ export default function Search() {
           className="p-2 outline-none border mt-2"
         />
 
-        <div
-          ref={booksListElmRef}
-          className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 "
-        >
-          {books.length > 0 ? (
-            books.map((book, index) => (
+        {books.length > 0 ? (
+          <div
+            ref={booksListElmRef}
+            className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 "
+          >
+            {books.map((book, index) => (
               <BookCard
                 props={{ book, showAddBtn: !addedBooksKeys.includes(book.key) }}
                 key={index}
               />
-            ))
-          ) : (
-            <p className="text-red-500">No search results!</p>
-          )}
-        </div>
-        <span ref={loadingElmRef} style={{ display: "none" }}>
+            ))}
+          </div>
+        ) : (
+          <p className="text-red-500 text-center mt-4">No search results!</p>
+        )}
+        <span ref={loadingElmRef} className="hidden mt-4">
           Loading...
         </span>
       </div>
