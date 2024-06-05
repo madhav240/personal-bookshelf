@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import BookCard from "../components/BookCard";
 
 function useDebounce(effect, dependencies, delay) {
@@ -13,18 +13,26 @@ function useDebounce(effect, dependencies, delay) {
 export default function Search() {
   const [q, setQ] = useState("");
   const [books, setBooks] = useState([]);
+  const booksListElmRef = useRef();
+  const loadingElmRef = useRef();
 
-  const addedBooksList = JSON.parse(localStorage.getItem("books")) || [];
+  const addedBooksKeys =
+    JSON.parse(localStorage.getItem("books")).map((book) => book.key) || [];
 
   useDebounce(
     async () => {
       if (q.trim()) {
+        booksListElmRef.current.style.display = "none";
+        loadingElmRef.current.style.display = "inline-block";
+
         const res = await fetch(
           `https://openlibrary.org/search.json?q=${q}&limit=10&page=1`
         );
-
         const data = await res.json();
         setBooks(data.docs);
+
+        booksListElmRef.current.style.display = "grid";
+        loadingElmRef.current.style.display = "none";
       }
     },
     [q],
@@ -44,14 +52,20 @@ export default function Search() {
           className="p-2 outline-none border mt-2"
         />
 
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 ">
+        <div
+          ref={booksListElmRef}
+          className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 "
+        >
           {books.map((book, index) => (
             <BookCard
-              props={{ book, showAddBtn: !addedBooksList.includes(book.key) }}
+              props={{ book, showAddBtn: !addedBooksKeys.includes(book.key) }}
               key={index}
             />
           ))}
         </div>
+        <span ref={loadingElmRef} style={{ display: "none" }}>
+          Loading...
+        </span>
       </div>
     </>
   );
